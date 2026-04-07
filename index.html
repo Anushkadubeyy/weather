@@ -60,39 +60,57 @@
         }
         .pulse-active { animation: pulse-ring 2s infinite ease-in-out; }
         
-        .main-scroller { overflow-y: auto; height: calc(100vh - 120px); }
+        .main-scroller { overflow-y: auto; height: calc(100vh - 160px); }
     </style>
 </head>
 <body class="p-6 flex flex-col gap-6 select-none">
 
-    <!-- Header -->
-    <header class="flex justify-between items-center">
-        <div class="flex items-center gap-6">
-            <div class="relative group">
-                <div class="absolute inset-0 bg-red-600 blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                <div class="relative bg-gradient-to-br from-red-500 to-red-700 p-3.5 rounded-2xl border border-white/20 shadow-2xl">
-                    <i data-lucide="shield-alert" class="text-white w-7 h-7"></i>
-                </div>
-            </div>
-            <div>
+    <!-- Header Section (Revised per Reference Image) -->
+    <header class="flex flex-col gap-4 border-b border-white/5 pb-6">
+        <div class="flex justify-between items-start">
+            <div class="flex flex-col gap-4">
                 <div class="flex items-center gap-3">
-                    <h1 class="text-2xl font-black text-white tracking-tight uppercase leading-none">Weather Command</h1>
-                    <span class="text-[10px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 tracking-widest uppercase">v5.2.0-STABLE</span>
+                    <div class="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-900/20">
+                        <i data-lucide="anchor" class="text-white w-6 h-6"></i>
+                    </div>
+                    <h1 class="text-2xl font-black text-white tracking-tighter uppercase leading-none">Severe Weather Alert</h1>
                 </div>
-                <div class="flex gap-4 items-center mt-2.5">
-                    <span class="flex items-center gap-2 text-[10px] font-bold text-emerald-500 uppercase tracking-widest">
-                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] pulse-active"></div>
-                        Live Telemetry Stream
-                    </span>
-                    <span class="w-1 h-1 rounded-full bg-slate-800"></span>
-                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">NSS Atlantic // Bridge Ops</span>
+                
+                <div class="flex flex-wrap gap-x-6 gap-y-2">
+                    <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
+                        <span class="text-slate-500">Date:</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/20 font-mono">03.04.2026</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
+                        <span class="text-slate-500">Port:</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/20 font-mono">Tokyo</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
+                        <span class="text-slate-500">Vessel:</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/20 font-mono">Seaspan ZZZZ</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-x-6 gap-y-2">
+                    <div class="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em]">
+                        <span class="text-slate-600 italic">Valid Period:</span>
+                        <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-white/5 font-mono">Next 24-48 Hours</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em]">
+                        <span class="text-slate-600 italic">Issued By:</span>
+                        <span class="text-blue-400 font-mono underline decoration-blue-400/30">NSSTeam@seaspancorp.com</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="text-right">
-            <div class="text-[10px] text-slate-600 uppercase tracking-[0.4em] font-black mb-1">Global System Time</div>
-            <div id="system-time" class="text-3xl text-white font-mono font-black tracking-tighter">00:00:00</div>
+            <div class="flex flex-col items-end gap-1">
+                <div class="flex items-center gap-2 text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-1">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] pulse-active"></div>
+                    System Active
+                </div>
+                <div class="text-[9px] text-slate-600 uppercase tracking-[0.4em] font-black">Live Bridge Time</div>
+                <div id="system-time" class="text-3xl text-white font-mono font-black tracking-tighter">00:00:00</div>
+            </div>
         </div>
     </header>
 
@@ -172,11 +190,10 @@
             </div>
         </aside>
 
-        <!-- Gauges and Additional Sections -->
+        <!-- Main Content Area -->
         <section class="col-span-9 flex flex-col gap-6 main-scroller custom-scrollbar pr-4">
             <!-- Premium Gauges Grid -->
             <div class="grid grid-cols-4 gap-6 shrink-0">
-                
                 <!-- Wind Speed -->
                 <div class="glass-panel rounded-[2rem] p-6 flex flex-col items-center justify-between min-h-[240px] relative">
                     <h3 class="text-[9px] font-black tracking-[0.3em] text-slate-500 uppercase">Wind Velocity</h3>
@@ -250,7 +267,7 @@
                 </div>
             </div>
 
-            <!-- Visual Intel Feed (Shifted Upwards) -->
+            <!-- Visual Intel Feed -->
             <div class="glass-panel rounded-[2.5rem] p-8 flex flex-col shrink-0">
                 <div class="flex justify-between items-center mb-8">
                     <div class="flex items-center gap-4">
@@ -281,40 +298,57 @@
 
             <!-- Potential Risk Section -->
             <div class="glass-panel rounded-[2.5rem] p-8 flex flex-col shrink-0">
-                <div class="flex items-center gap-3 mb-8">
-                    <i data-lucide="alert-octagon" class="w-5 h-5 text-amber-500"></i>
-                    <h3 class="text-xs font-black text-white uppercase tracking-[0.2em]">Potential Risk due to Bad Weather in Port</h3>
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="alert-octagon" class="w-5 h-5 text-amber-500"></i>
+                        <h3 class="text-xs font-black text-white uppercase tracking-[0.2em]">Potential Risk due to Bad Weather in Port</h3>
+                    </div>
+                    <span class="text-[8px] font-mono text-slate-700 uppercase tracking-widest">Click circle to update image</span>
                 </div>
+                
                 <div class="grid grid-cols-4 gap-8 px-4">
-                    <div class="flex flex-col items-center gap-4 group">
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer" onclick="triggerRiskUpload(0)">
                         <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
-                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
-                            <img src="https://images.unsplash.com/photo-1544253459-281b933f7467?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Mooring Ropes">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay group-hover:bg-blue-600/40 transition-colors z-10"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <i data-lucide="plus" class="w-8 h-8 text-white drop-shadow-lg"></i>
+                            </div>
+                            <img id="risk-img-0" src="https://images.unsplash.com/photo-1544253459-281b933f7467?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Mooring Ropes">
                         </div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Parting of Mooring Ropes</span>
                     </div>
-                    <div class="flex flex-col items-center gap-4 group">
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer" onclick="triggerRiskUpload(1)">
                         <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
-                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
-                            <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Collision Risk">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay group-hover:bg-blue-600/40 transition-colors z-10"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <i data-lucide="plus" class="w-8 h-8 text-white drop-shadow-lg"></i>
+                            </div>
+                            <img id="risk-img-1" src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Collision Risk">
                         </div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Collision Risk</span>
                     </div>
-                    <div class="flex flex-col items-center gap-4 group">
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer" onclick="triggerRiskUpload(2)">
                         <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
-                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
-                            <img src="https://images.unsplash.com/photo-1517409212558-85750015520c?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Grounding">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay group-hover:bg-blue-600/40 transition-colors z-10"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <i data-lucide="plus" class="w-8 h-8 text-white drop-shadow-lg"></i>
+                            </div>
+                            <img id="risk-img-2" src="https://images.unsplash.com/photo-1517409212558-85750015520c?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Grounding">
                         </div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Grounding</span>
                     </div>
-                    <div class="flex flex-col items-center gap-4 group">
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer" onclick="triggerRiskUpload(3)">
                         <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
-                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
-                            <img src="https://images.unsplash.com/photo-1544253459-281b933f7467?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Allision">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay group-hover:bg-blue-600/40 transition-colors z-10"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <i data-lucide="plus" class="w-8 h-8 text-white drop-shadow-lg"></i>
+                            </div>
+                            <img id="risk-img-3" src="https://images.unsplash.com/photo-1544253459-281b933f7467?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Allision">
                         </div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center leading-relaxed">Allision with Gantry/Jetty</span>
                     </div>
                 </div>
+                <input type="file" id="risk-image-input" class="hidden" accept="image/*">
             </div>
 
             <!-- Mitigating Measures Section -->
@@ -384,10 +418,11 @@
             windDir: 125,
             swellHeight: 3.2,
             swellDir: 190,
-            reconImages: []
+            reconImages: [],
+            currentRiskSlot: null
         };
 
-        // Helper to get status color class based on value and thresholds
+        // UI Color Helpers
         function getStatusColor(val, med, high) {
             if (val < med) return 'text-emerald-500';
             if (val < high) return 'text-amber-500';
@@ -404,10 +439,9 @@
         function updateUI() {
             const maxPath = 188.5;
             
-            // Wind Speed Color Logic
+            // Wind Speed
             const wsColorClass = getStatusColor(state.windSpeed, 35, 70);
             const wsShadow = getGlowShadow(state.windSpeed, 35, 70);
-            
             const wsVal = document.getElementById('wind-speed-val');
             const wsGauge = document.getElementById('gauge-wind-speed');
             const wsLabel = document.getElementById('ctrl-wind-speed-label');
@@ -415,15 +449,13 @@
             wsVal.innerText = state.windSpeed;
             wsVal.className = `text-5xl font-black tracking-tighter color-transition ${wsColorClass}`;
             wsVal.style.textShadow = wsShadow;
-            
             wsGauge.style.strokeDashoffset = maxPath - (maxPath * Math.min(state.windSpeed, 100)) / 100;
             wsGauge.setAttribute('class', `gauge-transition ${wsColorClass}`);
             wsLabel.className = `text-white font-mono bg-white/5 px-2 py-0.5 rounded border border-white/10 color-transition ${wsColorClass}`;
 
-            // Swell Height Color Logic
+            // Swell Height
             const shColorClass = getStatusColor(state.swellHeight, 3, 6);
             const shShadow = getGlowShadow(state.swellHeight, 3, 6);
-            
             const shVal = document.getElementById('swell-height-val');
             const shGauge = document.getElementById('gauge-swell-height');
             const shLabel = document.getElementById('ctrl-swell-height-label');
@@ -431,31 +463,28 @@
             shVal.innerText = state.swellHeight.toFixed(1);
             shVal.className = `text-5xl font-black tracking-tighter color-transition ${shColorClass}`;
             shVal.style.textShadow = shShadow;
-            
             shGauge.style.strokeDashoffset = maxPath - (maxPath * Math.min(state.swellHeight, 10)) / 10;
             shGauge.setAttribute('class', `gauge-transition ${shColorClass}`);
             shLabel.className = `text-white font-mono bg-white/5 px-2 py-0.5 rounded border border-white/10 color-transition ${shColorClass}`;
 
-            // Directional Logic
+            // Directional Needles
             document.getElementById('wind-dir-val').innerText = state.windDir;
             document.getElementById('wind-dir-needle').style.transform = `rotate(${state.windDir}deg)`;
             document.getElementById('swell-dir-val').innerText = state.swellDir;
             document.getElementById('swell-dir-needle').style.transform = `rotate(${state.swellDir}deg)`;
         }
 
+        // Time Engine
         function updateTime() {
             const now = new Date();
             document.getElementById('system-time').innerText = now.toLocaleTimeString('en-GB', { hour12: false });
         }
 
-        // Image Engine
+        // Recon Feed Logic
         const addBtn = document.getElementById('add-image-btn');
         const imgInput = document.getElementById('image-input');
         const galGrid = document.getElementById('gallery-grid');
         const emptyGal = document.getElementById('empty-gallery');
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalTS = document.getElementById('modal-timestamp');
 
         addBtn.addEventListener('click', () => imgInput.click());
         emptyGal.addEventListener('click', () => imgInput.click());
@@ -478,7 +507,6 @@
 
         function renderGallery() {
             if (state.reconImages.length > 0) emptyGal.classList.add('hidden');
-            
             const existing = galGrid.querySelectorAll('.recon-item');
             existing.forEach(i => i.remove());
 
@@ -502,6 +530,33 @@
             lucide.createIcons();
         }
 
+        // Potential Risk Upload Logic
+        const riskInput = document.getElementById('risk-image-input');
+        
+        function triggerRiskUpload(index) {
+            state.currentRiskSlot = index;
+            riskInput.click();
+        }
+
+        riskInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && state.currentRiskSlot !== null) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const imgElement = document.getElementById(`risk-img-${state.currentRiskSlot}`);
+                    imgElement.src = event.target.result;
+                    // Reset slot
+                    state.currentRiskSlot = null;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTS = document.getElementById('modal-timestamp');
+
         function openModal(img) {
             modalImg.src = img.url;
             modalTS.innerText = `CAPTURE_TIMESTAMP: ${img.ts} // AUTH: COMMAND_MASTER`;
@@ -514,7 +569,7 @@
             modal.classList.remove('flex');
         };
 
-        // Sliders
+        // Slider Listeners
         const setupSlider = (id, stateKey, labelId, isFloat = false) => {
             const el = document.getElementById(id);
             const labelSpan = document.getElementById(labelId);
@@ -531,7 +586,7 @@
         setupSlider('ctrl-swell-height', 'swellHeight', 'ctrl-swell-height-val', true);
         setupSlider('ctrl-swell-dir', 'swellDir', 'ctrl-swell-dir-val');
 
-        // Init
+        // Initial Start
         window.onload = () => {
             lucide.createIcons();
             updateUI();
