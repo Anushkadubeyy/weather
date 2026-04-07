@@ -59,6 +59,8 @@
             100% { transform: scale(0.95); opacity: 0.5; }
         }
         .pulse-active { animation: pulse-ring 2s infinite ease-in-out; }
+        
+        .main-scroller { overflow-y: auto; height: calc(100vh - 120px); }
     </style>
 </head>
 <body class="p-6 flex flex-col gap-6 select-none">
@@ -122,7 +124,7 @@
             </div>
 
             <!-- Enhanced Sliders -->
-            <div class="glass-panel rounded-3xl p-6 flex-1 flex flex-col gap-6">
+            <div class="glass-panel rounded-3xl p-6 flex-1 flex flex-col gap-6 overflow-hidden">
                 <div class="flex justify-between items-center mb-2">
                     <h2 class="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
                         <i data-lucide="settings-2" class="w-3.5 h-3.5 text-blue-400"></i> Command Interface
@@ -130,7 +132,7 @@
                     <span class="text-[8px] font-mono text-slate-600">INPUT_VECTORS</span>
                 </div>
 
-                <div class="space-y-7">
+                <div class="space-y-7 custom-scrollbar overflow-y-auto pr-1">
                     <div class="space-y-3">
                         <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider">
                             <span class="text-slate-400">Wind Intensity</span>
@@ -170,10 +172,10 @@
             </div>
         </aside>
 
-        <!-- Gauges and Recon -->
-        <section class="col-span-9 flex flex-col gap-6">
+        <!-- Gauges and Additional Sections -->
+        <section class="col-span-9 flex flex-col gap-6 main-scroller custom-scrollbar pr-4">
             <!-- Premium Gauges Grid -->
-            <div class="grid grid-cols-4 gap-6">
+            <div class="grid grid-cols-4 gap-6 shrink-0">
                 
                 <!-- Wind Speed -->
                 <div class="glass-panel rounded-[2rem] p-6 flex flex-col items-center justify-between min-h-[240px] relative">
@@ -248,8 +250,8 @@
                 </div>
             </div>
 
-            <!-- Visual Intel Feed -->
-            <div class="flex-1 glass-panel rounded-[2.5rem] p-8 flex flex-col relative overflow-hidden">
+            <!-- Visual Intel Feed (Shifted Upwards) -->
+            <div class="glass-panel rounded-[2.5rem] p-8 flex flex-col shrink-0">
                 <div class="flex justify-between items-center mb-8">
                     <div class="flex items-center gap-4">
                         <div class="bg-blue-500/10 p-2.5 rounded-xl">
@@ -267,12 +269,91 @@
                     <input type="file" id="image-input" class="hidden" accept="image/*">
                 </div>
 
-                <div id="gallery-container" class="flex-1 overflow-y-auto custom-scrollbar">
+                <div id="gallery-container">
                     <div id="gallery-grid" class="grid grid-cols-4 gap-5">
-                        <div id="empty-gallery" class="col-span-4 h-56 flex flex-col items-center justify-center border-2 border-dashed border-white/5 rounded-[2.5rem] opacity-30 group hover:opacity-50 transition-all cursor-pointer">
-                            <i data-lucide="upload" class="w-12 h-12 mb-4 group-hover:-translate-y-1 transition-transform"></i>
+                        <div id="empty-gallery" class="col-span-4 h-40 flex flex-col items-center justify-center border-2 border-dashed border-white/5 rounded-[2.5rem] opacity-30 group hover:opacity-50 transition-all cursor-pointer">
+                            <i data-lucide="upload" class="w-10 h-10 mb-4 group-hover:-translate-y-1 transition-transform"></i>
                             <span class="text-[11px] font-black uppercase tracking-[0.4em]">Mount Local Recon Data</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Potential Risk Section -->
+            <div class="glass-panel rounded-[2.5rem] p-8 flex flex-col shrink-0">
+                <div class="flex items-center gap-3 mb-8">
+                    <i data-lucide="alert-octagon" class="w-5 h-5 text-amber-500"></i>
+                    <h3 class="text-xs font-black text-white uppercase tracking-[0.2em]">Potential Risk due to Bad Weather in Port</h3>
+                </div>
+                <div class="grid grid-cols-4 gap-8 px-4">
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1544253459-281b933f7467?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Mooring Ropes">
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Parting of Mooring Ropes</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Collision Risk">
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Collision Risk</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1517409212558-85750015520c?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Grounding">
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Grounding</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div class="w-28 h-28 rounded-full border-4 border-white/5 overflow-hidden shadow-2xl relative">
+                            <div class="absolute inset-0 bg-blue-900/40 mix-blend-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1544253459-281b933f7467?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Allision">
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center leading-relaxed">Allision with Gantry/Jetty</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mitigating Measures Section -->
+            <div class="glass-panel rounded-[2.5rem] p-8 flex flex-col shrink-0 mb-12">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="clipboard-check" class="w-5 h-5 text-emerald-500"></i>
+                        <h3 class="text-xs font-black text-white uppercase tracking-[0.2em]">Mitigating Measures</h3>
+                    </div>
+                    <span class="text-[8px] font-mono text-slate-700 uppercase tracking-[0.5em]">Safety_Protocols_Active</span>
+                </div>
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                        <i data-lucide="cloud-rain" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Use your onboard weather forecast for improved decision-making.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                        <i data-lucide="user-check" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Conduct Risk Assessment - If it is safe to enter or leave the port.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                        <i data-lucide="cpu" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Keep ME/BT on standby for use as required.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                        <i data-lucide="anchor" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Keep all lines equally tight. Increase the frequency of checks.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                        <i data-lucide="ship" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Keep tugs on short notice. Verify UKC and squat calculations.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                        <i data-lucide="factory" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Verify gantries are parked safely - Bow and stern clear prior berthing.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5 hover:border-emerald-500/30 transition-colors col-span-2">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-emerald-500 mb-3"></i>
+                        <p class="text-[10px] text-slate-300 font-medium leading-relaxed">Ensure MPEX covers weather conditions and limitations imposed on maneuvering.</p>
                     </div>
                 </div>
             </div>
@@ -355,7 +436,7 @@
             shGauge.setAttribute('class', `gauge-transition ${shColorClass}`);
             shLabel.className = `text-white font-mono bg-white/5 px-2 py-0.5 rounded border border-white/10 color-transition ${shColorClass}`;
 
-            // Directional Logic (Keeps original design colors or stays white)
+            // Directional Logic
             document.getElementById('wind-dir-val').innerText = state.windDir;
             document.getElementById('wind-dir-needle').style.transform = `rotate(${state.windDir}deg)`;
             document.getElementById('swell-dir-val').innerText = state.swellDir;
